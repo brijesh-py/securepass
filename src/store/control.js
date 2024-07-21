@@ -172,6 +172,7 @@ const slice = createSlice({
       state.passwordHistory = state.passwordHistory.filter(
         (password) => password !== action.payload
       );
+      savePasswordsHandler(state.passwordHistory);
     },
     customChars: (state, action) => {
       state.customChars = action.payload;
