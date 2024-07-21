@@ -1,0 +1,37 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500&display=swap");
+
+.logo-font {
+  font-family: "Oswald", sans-serif;
+}
+
+body {
+  font-family: "Inter var", ui-sans-serif, system-ui, -apple-system;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 25px;
+  background-color: #c026d3;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.3s;
+}
+
+.loading {
+  animation: loading .3s ease-in-out;
+}
+
+@keyframes loading {
+  from {
+    transform: rotate(0deg)
+  }
+  to {
+    transform: rotateZ(360deg);
+  }
+}
