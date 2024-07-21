@@ -62,4 +62,4 @@ For any inquiries or feedback, please contact:
 
 - **Brijesh GP**
 - [brijeshsoftdev@duck.com]
-- [Your GitHub Profile](https://github.com/brijesh-py)
+- [Brijesh](https://github.com/brijesh-py)
