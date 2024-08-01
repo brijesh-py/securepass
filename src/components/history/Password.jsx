@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
-import { removePassword } from "../../store/control";
+import PropTypes from "prop-types";
+import { removePassword } from "../../store/passwordSlice";
 
 import { IoCopy } from "react-icons/io5";
 import { AiOutlineDelete } from "react-icons/ai";
@@ -41,6 +42,10 @@ const Password = ({ password }) => {
       </div>
     </div>
   );
+};
+
+Password.propTypes = {
+  password: PropTypes.string.isRequired,
 };
 
 export default Password;

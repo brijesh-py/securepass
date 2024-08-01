@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { FaCheckSquare } from "react-icons/fa";
 import { MdCheckBoxOutlineBlank } from "react-icons/md";
 
@@ -11,9 +12,17 @@ const CheckBox = ({ label, toggle, ...props }) => {
         <span className="text-fuchsia-600 text-2xl ">
           {toggle ? <FaCheckSquare /> : <MdCheckBoxOutlineBlank />}
         </span>
-        <span className=" text-zinc-800 whitespace-nowrap dark:text-zinc-300">{label}</span>
+        <span className=" text-zinc-800 whitespace-nowrap dark:text-zinc-300">
+          {label}
+        </span>
       </div>
     </>
   );
 };
+
+CheckBox.propTypes = {
+  label: PropTypes.string.isRequired,
+  toggle: PropTypes.bool.isRequired,
+};
+
 export default CheckBox;

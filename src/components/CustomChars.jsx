@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import Button from "./common/Button";
-import { customChars } from "../store/control";
+import { customChars } from "../store/passwordSlice";
 
 import { BsPinFill } from "react-icons/bs";
 import { useState } from "react";

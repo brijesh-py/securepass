@@ -1,14 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
 import Card from "./common/Card";
-import { includes } from "../store/control";
+import { includes } from "../store/passwordSlice";
 import Range from "./Range";
 import Checkbox from "./Checkbox";
 import CustomChars from "./CustomChars";
+import useAccessibility from "./hooks/useAccessibility";
 
 const Generate = () => {
   const selector = useSelector((state) => state);
   const dispatch = useDispatch();
-
+  useAccessibility();
   return (
     <>
       {selector.isCustomChars && (
@@ -22,6 +23,7 @@ const Generate = () => {
         <div className="flex flex-wrap items-center my-2">
           <Checkbox
             label="Lower Case"
+            title="Press L key"
             toggle={selector.isLowerCase}
             onClick={() => {
               dispatch(includes("isLowerCase"));
@@ -29,6 +31,7 @@ const Generate = () => {
           />
           <Checkbox
             label="Mix Case"
+            title="Press M key"
             toggle={selector.isMixCase}
             onClick={() => {
               dispatch(includes("isMixCase"));
@@ -36,6 +39,7 @@ const Generate = () => {
           />
           <Checkbox
             label="Numbers"
+            title="Press N key"
             toggle={selector.isNumbers}
             onClick={() => {
               dispatch(includes("isNumbers"));
@@ -43,6 +47,7 @@ const Generate = () => {
           />
           <Checkbox
             label="Special Chars"
+            title="Press S key"
             toggle={selector.isSpecialChars}
             onClick={() => {
               dispatch(includes("isSpecialChars"));
@@ -50,6 +55,7 @@ const Generate = () => {
           />
           <Checkbox
             label="Ambiguous Chars"
+            title="Press A key"
             toggle={selector.isAmbiguousChars}
             onClick={() => {
               dispatch(includes("isAmbiguousChars"));
@@ -57,6 +63,7 @@ const Generate = () => {
           />
           <Checkbox
             label="Custom"
+            title="Press C key"
             toggle={selector.isCustomChars}
             onClick={() => {
               dispatch(includes("isCustomChars"));
@@ -64,6 +71,7 @@ const Generate = () => {
           />
           <Checkbox
             label="E2R"
+            title="Press E key"
             toggle={selector.isE2R}
             onClick={() => {
               dispatch(includes("isE2R"));
@@ -71,6 +79,7 @@ const Generate = () => {
           />
           <Checkbox
             label="Save Password"
+            title="Press P key"
             toggle={selector.isSavePassword}
             onClick={() => {
               dispatch(includes("isSavePassword"));

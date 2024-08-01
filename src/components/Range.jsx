@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { passwordLength } from "../store/control";
+import { passwordLength } from "../store/passwordSlice";
 
 const Range = () => {
   const dispatch = useDispatch();

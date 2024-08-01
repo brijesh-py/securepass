@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-
 const savePasswordsHandler = (passwords) => {
   try {
     localStorage.setItem("passwords", JSON.stringify(passwords));
@@ -40,6 +39,7 @@ const passGenerate = (state, chars) => {
     holdPassword += chars[Math.floor(Math.random() * chars.length)];
   }
   state.password = holdPassword;
+  return holdPassword;
 };
 
 const e2RPasswordHandler = (state) => {

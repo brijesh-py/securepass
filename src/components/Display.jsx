@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { generatePassword, savePasswords, e2RPassword } from "../store/control";
+import { generatePassword, savePasswords, e2RPassword } from "../store/passwordSlice";
 import Card from "./common/Card";
 import Button from "./common/Button";
 
@@ -26,6 +26,16 @@ const Display = () => {
     dispatch(savePasswords(password));
   };
 
+  const generatePasswordHandler = () => {
+    setLoading(true);
+    const clear = setTimeout(() => {
+      clearTimeout(clear);
+      if (e2R) dispatch(e2RPassword());
+      else dispatch(generatePassword());
+      setLoading(false);
+    }, 300);
+  };
+
   useEffect(() => {
     dispatch(generatePassword());
   }, []);
@@ -44,20 +54,13 @@ const Display = () => {
         />
 
         <span
+        title="Press Ctrl key"
           data-tooltip-target="tooltip-default"
           id="loading"
           className={`text-slate-600 text-2xl cursor-pointer ${
             loading ? "loading" : ""
           } dark:text-white`}
-          onClick={() => {
-            setLoading(true);
-            const clear = setTimeout(() => {
-              clearTimeout(clear);
-              if (e2R) dispatch(e2RPassword());
-              else dispatch(generatePassword());
-              setLoading(false);
-            }, 300);
-          }}
+          onClick={generatePasswordHandler}
         >
           <IoRefresh />
         </span>
