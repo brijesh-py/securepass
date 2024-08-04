@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { generatePassword, includes } from "../../store/passwordSlice";
+import { generatePassword, toggleCheckbox } from "../../store/passwordSlice";
 
 const keyDown = (event, dispatch) => {
   const { key, ctrlKey } = event;
@@ -12,29 +12,32 @@ const keyDown = (event, dispatch) => {
 
   switch (key.toLowerCase()) {
     case "l":
-      dispatch(includes("isLowerCase"));
+      dispatch(toggleCheckbox("includeLowerCase"));
       break;
     case "m":
-      dispatch(includes("isMixCase"));
+      dispatch(toggleCheckbox("includeMixCase"));
       break;
     case "n":
-      dispatch(includes("isNumbers"));
+      dispatch(toggleCheckbox("includeNumbers"));
       break;
     case "s":
-      dispatch(includes("isSpecialChars"));
+      dispatch(toggleCheckbox("includeSpecialCharacters"));
       break;
     case "c":
-      dispatch(includes("isCustomChars"));
+      dispatch(toggleCheckbox("useCustomCharacters"));
       break;
     case "a":
-      dispatch(includes("isAmbiguousChars"));
+      dispatch(toggleCheckbox("includeAmbiguousCharacters"));
       break;
     case "e":
-      dispatch(includes("isE2R"));
+      dispatch(toggleCheckbox("useE2RAlgorithm"));
       break;
     case "p":
-      dispatch(includes("isSavePassword"));
+      dispatch(toggleCheckbox("savePassword"));
       break;
+      case "b":
+        dispatch(toggleCheckbox("generateBulkPasswords"));
+        break;
     default:
       break;
   }

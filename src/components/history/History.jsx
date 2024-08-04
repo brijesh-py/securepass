@@ -13,12 +13,17 @@ const History = () => {
       </div>
       <div className="mt-2 max-h-[300px] overflow-scroll">
         {passwords?.map((password, key) => (
-          <Password key={key} password={password} />
+          <Password
+            key={key}
+            password={password.password}
+            generatedAt={password.generatedAt}
+            id={password.id}
+          />
         ))}
         {passwords?.length === 0 && (
           <div className="text-center mt-2">
             <span className="text-zinc-500 dark:text-zinc-400">
-              Auto Save Last 10 Passwords
+              Save Last 10 Passwords, Auto Expire After 7 Days
             </span>
           </div>
         )}

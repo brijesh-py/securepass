@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import slice from "./passwordSlice";
+import passwordSlice from "./passwordSlice";
 
 const store = configureStore({
-  reducer: slice,
+  reducer: passwordSlice,
 });
 
 export default store;

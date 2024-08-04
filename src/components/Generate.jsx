@@ -1,22 +1,59 @@
 import { useDispatch, useSelector } from "react-redux";
 import Card from "./common/Card";
-import { includes } from "../store/passwordSlice";
+import {
+  generateE2RPassword,
+  generatePassword,
+  toggleCheckbox,
+} from "../store/passwordSlice";
 import Range from "./Range";
-import Checkbox from "./Checkbox";
+import Checkbox from "./checkbox/Checkbox";
 import CustomChars from "./CustomChars";
-import useAccessibility from "./hooks/useAccessibility";
+import { useState } from "react";
+import { IoRefresh } from "react-icons/io5";
+import Button from "./common/Button";
 
 const Generate = () => {
   const selector = useSelector((state) => state);
   const dispatch = useDispatch();
-  useAccessibility();
+  const [loading, setLoading] = useState(false);
+  const useE2RAlgorithm = useSelector((state) => state.useE2RAlgorithm);
+
+  const generatePasswordHandler = () => {
+    setLoading(true);
+    const clear = setTimeout(() => {
+      clearTimeout(clear);
+      if (useE2RAlgorithm) dispatch(generateE2RPassword());
+      else dispatch(generatePassword());
+      setLoading(false);
+    }, 100);
+  };
+
   return (
     <>
-      {selector.isCustomChars && (
+      {selector.useCustomCharacters && (
         <Card className="flex items-center justify-between">
           <CustomChars />
         </Card>
       )}
+      <div className="flex items-center space-x-2 my-3">
+        <Button
+          className=" flex items-center space-x-1"
+          onClick={generatePasswordHandler}
+          title="Press Ctrl key"
+        >
+          <span
+            title="Press Ctrl key"
+            data-tooltip-target="tooltip-default"
+            id="loading"
+            className={`text-white text-lg cursor-pointer ${
+              loading ? "loading" : ""
+            } dark:text-white`}
+          >
+            <IoRefresh />
+          </span>
+          <span className="capitalize">Generate Password</span>
+        </Button>
+      </div>
       <Card>
         <Range />
         {/* Checkbox */}
@@ -24,65 +61,73 @@ const Generate = () => {
           <Checkbox
             label="Lower Case"
             title="Press L key"
-            toggle={selector.isLowerCase}
+            toggle={selector.includeLowerCase}
             onClick={() => {
-              dispatch(includes("isLowerCase"));
+              dispatch(toggleCheckbox("includeLowerCase"));
             }}
           />
           <Checkbox
             label="Mix Case"
             title="Press M key"
-            toggle={selector.isMixCase}
+            toggle={selector.includeMixCase}
             onClick={() => {
-              dispatch(includes("isMixCase"));
+              dispatch(toggleCheckbox("includeMixCase"));
             }}
           />
           <Checkbox
             label="Numbers"
             title="Press N key"
-            toggle={selector.isNumbers}
+            toggle={selector.includeNumbers}
             onClick={() => {
-              dispatch(includes("isNumbers"));
+              dispatch(toggleCheckbox("includeNumbers"));
             }}
           />
           <Checkbox
             label="Special Chars"
             title="Press S key"
-            toggle={selector.isSpecialChars}
+            toggle={selector.includeSpecialCharacters}
             onClick={() => {
-              dispatch(includes("isSpecialChars"));
+              dispatch(toggleCheckbox("includeSpecialCharacters"));
             }}
           />
           <Checkbox
             label="Ambiguous Chars"
             title="Press A key"
-            toggle={selector.isAmbiguousChars}
+            toggle={selector.includeAmbiguousCharacters}
             onClick={() => {
-              dispatch(includes("isAmbiguousChars"));
+              dispatch(toggleCheckbox("includeAmbiguousCharacters"));
             }}
           />
           <Checkbox
             label="Custom"
             title="Press C key"
-            toggle={selector.isCustomChars}
+            toggle={selector.useCustomCharacters}
             onClick={() => {
-              dispatch(includes("isCustomChars"));
+              dispatch(toggleCheckbox("useCustomCharacters"));
             }}
           />
           <Checkbox
             label="E2R"
             title="Press E key"
-            toggle={selector.isE2R}
+            toggle={selector.useE2RAlgorithm}
             onClick={() => {
-              dispatch(includes("isE2R"));
+              dispatch(toggleCheckbox("useE2RAlgorithm"));
             }}
           />
           <Checkbox
             label="Save Password"
             title="Press P key"
-            toggle={selector.isSavePassword}
+            toggle={selector.savePassword}
             onClick={() => {
-              dispatch(includes("isSavePassword"));
+              dispatch(toggleCheckbox("savePassword"));
+            }}
+          />
+          <Checkbox
+            label="Bulk Passwords"
+            title="Press B key"
+            toggle={selector.generateBulkPasswords}
+            onClick={() => {
+              dispatch(toggleCheckbox("generateBulkPasswords"));
             }}
           />
         </div>
