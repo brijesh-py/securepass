@@ -7,10 +7,7 @@ import {
   handleToggleMailModal,
 } from "./actions";
 
-import {
-  handlePasswords,
-  handleE2RPasswords,
-} from "./passwordGenerators";
+import { handlePasswords, handleE2RPasswords } from "./passwordGenerators";
 
 import { fetchSavedPasswords } from "./utils";
 

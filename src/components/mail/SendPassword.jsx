@@ -15,7 +15,7 @@ const SendPassword = () => {
   const dispatch = useDispatch();
   const { register, handleSubmit, reset } = useForm();
   const password = useSelector((state) => state.tempPassword);
-  const { sendPassword, success, error } = useSendPassword(form);
+  const { sendPassword, success } = useSendPassword(form);
 
   const sendEmail = (data) => {
     setDisabled(true);
@@ -24,24 +24,22 @@ const SendPassword = () => {
         .then(() => {
           if (success) {
             toast.success(" Password has been sent!");
-            console.log(success);
             dispatch(toggleMailModal());
             reset();
             setDisabled(false);
           } else {
             toast.error("Password has been not sent!");
-            console.log(error);
             setDisabled(false);
           }
         })
         .catch(() => {
           toast.error("Password has been not sent!");
-          console.log(error);
           reset();
           setDisabled(false);
         });
     } else {
       toast.error("Don't sent custom message!");
+      setDisabled(false);
     }
   };
 
