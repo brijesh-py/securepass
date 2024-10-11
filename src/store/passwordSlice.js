@@ -9,7 +9,7 @@ import {
 
 import { handlePasswords, handleE2RPasswords } from "./passwordGenerators";
 
-import { fetchSavedPasswords } from "./utils";
+import { expirePasswords } from "./utils";
 
 const initialState = {
   password: [],
@@ -27,7 +27,7 @@ const initialState = {
   generateBulkPasswords: false,
   sendPasswordByEmail: false,
   bulkPasswords: [],
-  passwordHistory: fetchSavedPasswords() || [],
+  passwordHistory: expirePasswords() || [],
 };
 
 const handleUpdatePasswordLength = (state, action) => {

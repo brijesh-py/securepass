@@ -1,11 +1,7 @@
-export const sevenDaysMilliseconds = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
+import { expirePasswords } from "./utils";
 
-export const handleExpiredPasswordTime = (state) => {
-  state.passwordHistory = state.passwordHistory.filter(
-    (pass) =>
-      new Date(pass.generatedAt).getTime() >=
-      new Date().getTime() - sevenDaysMilliseconds
-  );
+export const handleHistoryPasswords = (state) => {
+  state.passwordsHistory = expirePasswords();
 };
 
 export const generatePasswordID = () => {
@@ -80,7 +76,7 @@ export const generateE2RPasswords = (state) => {
       ];
     }
   } else {
-    for (let i = 1; i <= parseInt(state.passwordLength/1.2 ); i++) {
+    for (let i = 1; i <= parseInt(state.passwordLength / 1.2); i++) {
       if (i % 4 === 0) {
         holdPassword += `${
           consonants[Math.floor(Math.random() * consonants.length)]
@@ -135,6 +131,6 @@ export const handlePasswords = (state) => {
   chars += includeAmbiguousCharacters ? ambiguousChars : "";
   state.bulkPasswords = [];
   state.password = [];
-  handleExpiredPasswordTime(state);
+  handleHistoryPasswords(state);
   handleGeneratePasswords(state, chars);
 };

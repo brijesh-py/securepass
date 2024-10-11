@@ -37,3 +37,16 @@ export const fetchSavedPasswords = () => {
     return [];
   }
 };
+
+export const sevenDaysMilliseconds = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
+
+export const expirePasswords = () => {
+  const passwords = fetchSavedPasswords();
+  const unExpiredPasswords = passwords.filter(
+    (pass) =>
+      new Date(pass.generatedAt).getTime() >=
+      new Date().getTime() - sevenDaysMilliseconds
+  );
+  savePasswords(unExpiredPasswords);
+  return unExpiredPasswords || [];
+};
