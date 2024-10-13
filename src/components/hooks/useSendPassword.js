@@ -1,6 +1,7 @@
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
 import conf from "../../conf";
+import { toast } from "react-toastify";
 
 const useSendPassword = (form) => {
   const [success, setSuccess] = useState(false);
@@ -18,12 +19,12 @@ const useSendPassword = (form) => {
         .then(
           (response) => {
             setSuccess(true);
-            setError("");
+            toast.success("Password has been sent!");
             return response;
           },
           (error) => {
             setError(error.text);
-            setSuccess(false);
+            toast.error("Password has been not sent!");
             return error;
           }
         );

@@ -23,12 +23,10 @@ const SendPassword = () => {
       sendPassword()
         .then(() => {
           if (success) {
-            toast.success(" Password has been sent!");
             dispatch(toggleMailModal());
             reset();
             setDisabled(false);
           } else {
-            toast.error("Password has been not sent!");
             setDisabled(false);
           }
         })
